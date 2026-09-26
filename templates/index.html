@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="QR Studio - Create beautiful customized QR codes instantly."
+    >
+
+    <title>QR Studio | QR Code Generator</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="background"></div>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                QR
+            </div>
+
+            <span>QR Studio</span>
+
+        </div>
+
+
+        <button
+            id="themeBtn"
+            class="theme-btn"
+            title="Toggle theme"
+        >
+            ☀️
+        </button>
+
+    </nav>
+
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-badge">
+                ⚡ Fast • Simple • Free
+            </div>
+
+            <h1>
+                Create QR Codes
+                <span>Instantly.</span>
+            </h1>
+
+            <p>
+                Generate beautiful and customizable QR codes
+                for links, text, email, phone and Wi-Fi.
+            </p>
+
+        </section>
+
+
+
+        <!-- APP -->
+
+        <section class="app-card">
+
+
+            <!-- LEFT -->
+
+            <div class="controls">
+
+
+                <div class="section-title">
+
+                    <span class="number">01</span>
+
+                    <div>
+                        <h2>QR Content</h2>
+                        <p>Choose what your QR code should contain.</p>
+                    </div>
+
+                </div>
+
+
+
+                <!-- TYPES -->
+
+                <div class="type-grid">
+
+                    <button
+                        class="type-btn active"
+                        data-type="text"
+                    >
+                        <span>📝</span>
+                        Text
+                    </button>
+
+                    <button
+                        class="type-btn"
+                        data-type="url"
+                    >
+                        <span>🔗</span>
+                        URL
+                    </button>
+
+                    <button
+                        class="type-btn"
+                        data-type="email"
+                    >
+                        <span>✉️</span>
+                        Email
+                    </button>
+
+                    <button
+                        class="type-btn"
+                        data-type="phone"
+                    >
+                        <span>📞</span>
+                        Phone
+                    </button>
+
+                    <button
+                        class="type-btn"
+                        data-type="wifi"
+                    >
+                        <span>📶</span>
+                        Wi-Fi
+                    </button>
+
+                </div>
+
+
+
+                <!-- INPUT -->
+
+                <div
+                    id="inputArea"
+                    class="input-area"
+                >
+
+                    <label id="inputLabel">
+                        Enter your text
+                    </label>
+
+                    <textarea
+                        id="qrInput"
+                        placeholder="Type anything here..."
+                        maxlength="2000"
+                    ></textarea>
+
+                    <div class="counter">
+
+                        <span id="charCount">
+                            0
+                        </span>
+
+                        / 2000
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- WIFI FIELDS -->
+
+                <div
+                    id="wifiFields"
+                    class="wifi-fields hidden"
+                >
+
+                    <div>
+
+                        <label>
+                            Wi-Fi Name
+                        </label>
+
+                        <input
+                            id="wifiName"
+                            type="text"
+                            placeholder="My WiFi"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Password
+                        </label>
+
+                        <input
+                            id="wifiPassword"
+                            type="text"
+                            placeholder="Password"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Security
+                        </label>
+
+                        <select id="wifiSecurity">
+
+                            <option value="WPA">
+                                WPA / WPA2
+                            </option>
+
+                            <option value="WEP">
+                                WEP
+                            </option>
+
+                            <option value="nopass">
+                                No Password
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CUSTOMIZATION -->
+
+                <div class="section-title customization-title">
+
+                    <span class="number">02</span>
+
+                    <div>
+
+                        <h2>Customize</h2>
+
+                        <p>
+                            Make your QR code your own.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="custom-grid">
+
+
+                    <div class="color-control">
+
+                        <label>
+                            QR Color
+                        </label>
+
+                        <div class="color-row">
+
+                            <input
+                                type="color"
+                                id="qrColor"
+                                value="#000000"
+                            >
+
+                            <span id="qrColorText">
+                                #000000
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="color-control">
+
+                        <label>
+                            Background
+                        </label>
+
+                        <div class="color-row">
+
+                            <input
+                                type="color"
+                                id="bgColor"
+                                value="#ffffff"
+                            >
+
+                            <span id="bgColorText">
+                                #FFFFFF
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="size-control">
+
+                    <div class="size-header">
+
+                        <label>
+                            QR Quality
+                        </label>
+
+                        <span id="sizeValue">
+                            High
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="range"
+                        id="qrSize"
+                        min="5"
+                        max="15"
+                        value="10"
+                    >
+
+                    <div class="range-labels">
+
+                        <span>
+                            Compact
+                        </span>
+
+                        <span>
+                            High Quality
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <button
+                    id="generateBtn"
+                    class="generate-btn"
+                >
+
+                    <span class="btn-icon">
+                        ✨
+                    </span>
+
+                    <span id="generateText">
+                        Generate QR Code
+                    </span>
+
+                </button>
+
+
+                <button
+                    id="clearBtn"
+                    class="clear-btn"
+                >
+                    Clear
+                </button>
+
+
+                <p
+                    id="errorMessage"
+                    class="error"
+                ></p>
+
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <div class="preview">
+
+
+                <div class="preview-header">
+
+                    <div>
+
+                        <span class="preview-label">
+                            PREVIEW
+                        </span>
+
+                        <h2>Your QR Code</h2>
+
+                    </div>
+
+                    <div
+                        id="statusDot"
+                        class="status-dot"
+                    ></div>
+
+                </div>
+
+
+
+                <!-- EMPTY -->
+
+                <div
+                    id="emptyState"
+                    class="empty-state"
+                >
+
+                    <div class="qr-placeholder">
+
+                        <div class="fake-qr">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                    </div>
+
+                    <h3>
+                        Nothing here yet
+                    </h3>
+
+                    <p>
+                        Enter your content and generate
+                        your QR code.
+                    </p>
+
+                </div>
+
+
+
+                <!-- RESULT -->
+
+                <div
+                    id="qrResult"
+                    class="qr-result hidden"
+                >
+
+                    <div class="qr-image-wrapper">
+
+                        <img
+                            id="qrImage"
+                            alt="Generated QR Code"
+                        >
+
+                    </div>
+
+
+                    <div class="ready-badge">
+                        ✓ QR Ready
+                    </div>
+
+
+                    <p>
+                        Your QR code is ready to use.
+                    </p>
+
+
+                    <a
+                        id="downloadBtn"
+                        class="download-btn"
+                        download="qr-studio-code.png"
+                    >
+
+                        <span>
+                            ↓
+                        </span>
+
+                        Download PNG
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- FEATURES -->
+
+        <section class="features">
+
+            <div class="feature">
+
+                <span>⚡</span>
+
+                <div>
+                    <h3>Instant</h3>
+                    <p>Generate QR codes in seconds.</p>
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <span>🎨</span>
+
+                <div>
+                    <h3>Customizable</h3>
+                    <p>Choose your own colors.</p>
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <span>🔒</span>
+
+                <div>
+                    <h3>Private</h3>
+                    <p>No account or database required.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <p>
+                QR Studio © 2026 • Built with Python & Flask
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+    <script
+        src="{{ url_for('static', filename='script.js') }}"
+    ></script>
+
+</body>
+
+</html>
